@@ -19,6 +19,4 @@ export DB_PASSWORD=your_password
 
 ### 4 Run the Project
 Use the following command to build and run the project:
-
-```bash
 ./gradlew run
