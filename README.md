@@ -24,3 +24,13 @@ Use the following command to build and run the project:
 ```bash
 ./gradlew run
 ```
+
+All necessary SQL commands for setting up the BookWise database are included in a single script file named BookWise.sql.
+
+This file combines the database schema creation (create_schema.sql) and the data initialization (initialize_data.sql) into one convenient script.
+
+It will:
+
+Create all required tables with appropriate constraints.
+
+Populate each table with at least 15 entries, with no NULL values.
