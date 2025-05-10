@@ -34,3 +34,12 @@ It will:
 Create all required tables with appropriate constraints.
 
 Populate each table with at least 15 entries, with no NULL values.
+
+Error while deleting a book
+The error you're seeing is not a bug or coding mistake—it's actually an intentional feature designed to maintain data integrity in the BookWise application. The system prevents you from deleting a book record if that book is currently on hold or loaned out, because removing it would break the relationships that other tables (like holds or loans) depend on. This safeguard ensures the database stays consistent and avoids orphaned records. To delete a book, all related holds and loans must be cleared first. This behavior is expected and necessary in any well-designed library management system.
+
+
+
+
+
+
