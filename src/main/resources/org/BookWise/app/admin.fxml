@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.layout.InputGroup?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.MasterDetailPane?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.BookWise.app.AdminController"
+      spacing="30" minHeight="800" minWidth="1400">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <fx:define>
+        <ToggleGroup fx:id="tabs"/>
+
+        <MasterDetailPane fx:id="booksView" dividerPosition="0.75" VBox.vgrow="ALWAYS">
+            <masterNode>
+                <BorderPane>
+                    <center>
+                        <TableView fx:id="booksTable" editable="true"/>
+                    </center>
+                    <bottom>
+                        <ToolBar>
+                            <Button text="Add Book" onAction="#add" userData="$booksTable"
+                                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                            <Button text="Delete Book" onAction="#delete" userData="$booksTable"
+                                    style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                        </ToolBar>
+                    </bottom>
+                </BorderPane>
+            </masterNode>
+            <detailNode>
+                <TableView fx:id="bookLoansTable" minWidth="600" editable="true"/>
+            </detailNode>
+        </MasterDetailPane>
+
+        <MasterDetailPane fx:id="patronsView" detailSide="RIGHT" dividerPosition="0.65" VBox.vgrow="ALWAYS">
+            <masterNode>
+                <BorderPane>
+                    <center>
+                        <TableView fx:id="patronsTable" editable="true"/>
+                    </center>
+                    <bottom>
+                        <ToolBar>
+                            <Button text="Delete Patron" onAction="#delete" userData="$patronsTable"
+                                    style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                        </ToolBar>
+                    </bottom>
+                </BorderPane>
+            </masterNode>
+            <detailNode>
+                <TableView fx:id="patronLoansTable" minWidth="600" editable="true"/>
+            </detailNode>
+        </MasterDetailPane>
+
+        <BorderPane fx:id="loansView" VBox.vgrow="ALWAYS">
+            <center>
+                <TableView fx:id="loansTable" editable="true"/>
+            </center>
+            <bottom>
+                <ToolBar>
+                    <Button text="Add Loan" onAction="#add" userData="$loansTable"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                    <Button text="Delete Loan" onAction="#delete" userData="$loansTable"
+                            style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                </ToolBar>
+            </bottom>
+        </BorderPane>
+
+        <BorderPane fx:id="holdsView" VBox.vgrow="ALWAYS">
+            <center>
+                <TableView fx:id="holdsTable" editable="true"/>
+            </center>
+            <bottom>
+                <ToolBar>
+                    <Button text="Add Hold" onAction="#add" userData="$holdsTable"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                    <Button text="Delete Hold" onAction="#delete" userData="$holdsTable"
+                            style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                </ToolBar>
+            </bottom>
+        </BorderPane>
+
+        <BorderPane fx:id="finesView" VBox.vgrow="ALWAYS">
+            <center>
+                <TableView fx:id="finesTable" editable="true"/>
+            </center>
+            <bottom>
+                <ToolBar>
+                    <Button text="Mark as Paid" onAction="#delete" userData="$finesTable"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 16px;"/>
+                </ToolBar>
+            </bottom>
+        </BorderPane>
+    </fx:define>
+
+    <HBox alignment="CENTER" spacing="20">
+        <InputGroup>
+            <ToggleButton text="Books" toggleGroup="$tabs" userData="$booksView" selected="true"
+                          style="-fx-font-size: 16px; -fx-padding: 10 20;"/>
+            <ToggleButton text="Patrons" toggleGroup="$tabs" userData="$patronsView"
+                          style="-fx-font-size: 16px; -fx-padding: 10 20;"/>
+            <ToggleButton text="Loans" toggleGroup="$tabs" userData="$loansView"
+                          style="-fx-font-size: 16px; -fx-padding: 10 20;"/>
+            <ToggleButton text="Holds" toggleGroup="$tabs" userData="$holdsView"
+                          style="-fx-font-size: 16px; -fx-padding: 10 20;"/>
+            <ToggleButton text="Fines" toggleGroup="$tabs" userData="$finesView"
+                          style="-fx-font-size: 16px; -fx-padding: 10 20;"/>
+        </InputGroup>
+        <Button text="Logout" onAction="#logout"
+                style="-fx-font-size: 16px; -fx-padding: 10 20; -fx-background-color: #9E9E9E; -fx-text-fill: white;"/>
+    </HBox>
+
+    <fx:reference source="booksView"/>
+</VBox>

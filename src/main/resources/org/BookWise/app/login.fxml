@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.controls.Message?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.BookWise.app.LoginController"
+      spacing="20" minHeight="800" minWidth="1000" style="-fx-background-color: #f4f4f4;">
+    
+    <padding>
+        <Insets top="40" bottom="40" left="60" right="60"/>
+    </padding>
+
+    <ImageView preserveRatio="true" fitHeight="160" fitWidth="160">
+        <Image url="@logo.png"/>
+    </ImageView>
+
+    <HBox alignment="CENTER">
+        <Label text="Welcome to BookWise"
+               style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <VBox spacing="15" maxWidth="400">
+        <TextField fx:id="username" promptText="Username"/>
+        <TextField fx:id="fullName" promptText="Full Name"/>
+        <PasswordField fx:id="password" promptText="Password"/>
+        <PasswordField fx:id="confirmPassword" promptText="Confirm Password"/>
+        <TextField fx:id="email" promptText="E-mail"/>
+        <TextField fx:id="address" promptText="Address"/>
+    </VBox>
+
+    <Message fx:id="errorMessage" title="Error" description=""
+             styleClass="danger" visible="false" managed="false"/>
+
+    <HBox alignment="CENTER" spacing="40">
+        <Button fx:id="login" text="Login" onAction="#login" defaultButton="true" minWidth="100"/>
+        <Button fx:id="register" text="Register" onAction="#register" minWidth="100"/>
+    </HBox>
+
+</VBox>

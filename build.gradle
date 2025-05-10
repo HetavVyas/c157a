@@ -1,0 +1,67 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.beryx.jlink' version '3.0.1'
+
+    id 'idea'
+}
+idea.module.outputDir file('out/production/classes') // fix running via IntelliJ
+
+repositories {
+    mavenCentral()
+}
+
+version '1.0'
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+defaultTasks 'run'
+
+application {
+    mainModule = 'org.BookWise.app'
+    mainClass = 'org.BookWise.app.Main'
+}
+
+javafx {
+    version = '21.0.1'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+    implementation 'fr.brouillard.oss:cssfx:11.5.1'
+    implementation 'io.github.mkpaz:atlantafx-base:2.0.1'
+    implementation 'org.controlsfx:controlsfx:11.2.1'
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    implementation 'org.mybatis:mybatis:3.5.7'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'org.assertj:assertj-core:3.25.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jlink {
+    addOptions '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--strip-native-commands',
+            '--dedup-legal-notices=error-if-not-same-content'
+    launcher {
+        name = 'BookWise'
+        noConsole = true
+    }
+    jpackage {
+        vendor = 'BookWise'
+        installerOutputDir = file("${buildDir}/distributions/")
+        if (DefaultNativePlatform.currentOperatingSystem.isMacOsX()) {
+            installerType = "dmg"
+        } else if (DefaultNativePlatform.currentOperatingSystem.isWindows()) {
+            installerOptions.addAll '--win-dir-chooser', '--win-menu', '--win-shortcut'
+            installerType = "msi"
+        } else {
+            installerType = "deb"
+            installerOptions.addAll '--linux-shortcut'
+        }
+    }
+}
+
