@@ -17,7 +17,7 @@ If your MySQL `root` user has a password, set it as an environment variable:
 ```bash
 export DB_PASSWORD=your_password
 
-Run the Project
+### 4 Run the Project
 Use the following command to build and run the project:
 
 ```bash
